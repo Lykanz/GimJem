@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GM : MonoBehaviour {
+public class placeHolderScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
