@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Samsung : MonoBehaviour {
+public class AsteroidSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
