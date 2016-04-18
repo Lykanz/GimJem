@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class yes : MonoBehaviour {
+public class samsung : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
