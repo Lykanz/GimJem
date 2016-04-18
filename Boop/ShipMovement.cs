@@ -12,7 +12,7 @@ public class ShipMovement : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
 	}
 	
-	void Update () {
+	void FixedUpdate () {
         if (Input.GetKey("w"))
         {
             m_Rigidbody.AddRelativeForce(Vector3.up * max_VerticalSpeed);
