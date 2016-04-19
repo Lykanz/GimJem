@@ -4,30 +4,47 @@ using System.Collections;
 public class ShipMovement : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
-    [SerializeField] private float max_VerticalSpeed = 0.5f;
-    [SerializeField] private float max_HorizontalSpeed = 1.0f;
+    [SerializeField] private float ySpeed = 0.5f;
+    [SerializeField] private float xSpeed = 1.0f;
+    private float max_VerticalSpeed;
+    private float max_HorizontalSpeed;
 
 	void Start ()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        max_VerticalSpeed = ySpeed * 5.0f;
+        max_HorizontalSpeed = xSpeed * 5.0f;
 	}
 	
-	void FixedUpdate () {
+	void FixedUpdate ()
+    {
         if (Input.GetKey("w"))
         {
-            m_Rigidbody.AddRelativeForce(Vector3.up * max_VerticalSpeed);
+            m_Rigidbody.AddRelativeForce(Vector3.up * ySpeed);
         }
-        else if (Input.GetKey("a"))
+        if (Input.GetKey("s"))
         {
-            m_Rigidbody.AddRelativeForce(-Vector3.right * max_HorizontalSpeed);
+            m_Rigidbody.AddRelativeForce(-Vector3.up * ySpeed);
         }
-        else if (Input.GetKey("s"))
+
+        if (Input.GetKey("a"))
         {
-            m_Rigidbody.AddRelativeForce(-Vector3.up * max_HorizontalSpeed * max_VerticalSpeed);
+            m_Rigidbody.AddRelativeForce(-Vector3.right * xSpeed);
         }
-        else if (Input.GetKey("d"))
+        
+        if (Input.GetKey("d"))
         {
-            m_Rigidbody.AddRelativeForce(Vector3.right * max_HorizontalSpeed);
+            m_Rigidbody.AddRelativeForce(Vector3.right * xSpeed);
+        }
+
+        if (Mathf.Abs(m_Rigidbody.velocity.x) > max_HorizontalSpeed)
+        {
+            m_Rigidbody.velocity = m_Rigidbody.velocity.normalized * max_HorizontalSpeed;
+        }
+
+        if (Mathf.Abs(m_Rigidbody.velocity.y) > max_VerticalSpeed)
+        {
+            m_Rigidbody.velocity = m_Rigidbody.velocity.normalized * max_VerticalSpeed;
         }
 	}
 }

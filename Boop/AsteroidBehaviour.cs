@@ -25,4 +25,23 @@ public class AsteroidBehaviour : MonoBehaviour
         Quaternion deltaRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, Random.Range(min_EulerAngleVelocity, max_EulerAngleVelocity)) * Time.deltaTime);
         m_Rigidbody.MoveRotation(m_Rigidbody.rotation * deltaRotation);
     }
+
+    void Update()
+    {
+        if (gameObject.transform.position.x > 15.0f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnCollisionEnter(Collision _Col)
+    {
+        if (_Col.gameObject.tag == "Asteroid")
+        {
+            //Play animation
+        }
+        if (_Col.gameObject.tag == "Player")
+        {
+        }
+    }
 }

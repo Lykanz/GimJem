@@ -39,8 +39,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     private Vector3 SelectHeight(float _fMinHeight, float _fMaxHeight)
     {
-        int xaxis = 0; // Change this later
-        return new Vector3(xaxis, Random.Range(_fMinHeight, _fMaxHeight), 0);
+        return new Vector3(-15.0f, Random.Range(_fMinHeight, _fMaxHeight), 0);
     }
 
     private Quaternion SelectRotation()
