@@ -4,22 +4,27 @@ using System.Collections;
 public class GunFire : MonoBehaviour
 {
     public GameObject m_Laser;
-    private GameObject m_Ship;
-	// Use this for initialization
-	void Start ()
+    private bool m_bLoaded;
+
+    void Reloading()
     {
-        m_Ship = GameObject.Find("SSK-IDK");
-	}
-	
-	// Update is called once per frame
+        m_bLoaded = true;
+    }
+
+    void Start()
+    {
+        m_bLoaded = true;
+    }
+
 	void Update ()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && m_bLoaded == true)
         {
-            if (gameObject.name == "SSK-IDK")
-            {
-                GameObject laser = Instantiate(m_Laser, gameObject.transform.position, Quaternion.identity) as GameObject;
-            }
+            Vector3 temp = gameObject.transform.position;
+            temp.x -= 1.5f;
+            GameObject laser = Instantiate(m_Laser, temp, Quaternion.identity) as GameObject;
+            m_bLoaded = false;
+            Invoke("Reloading", 1.0f);
         }
 	}
 }
