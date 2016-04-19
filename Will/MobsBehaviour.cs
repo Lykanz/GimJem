@@ -4,55 +4,35 @@ using System.Collections;
 public class MobsBehaviour : MonoBehaviour {
 
 	Rigidbody rb3d;
-	Transform target;
+	GameObject Player;
 	[SerializeField] private float speed = 1.0f;
-	private float actionChange = 3.0f;
 	private int action;
-	private float maxdistance;
-	private Transform myTransform;
-
-	void Awake(){
-		myTransform = transform;
-	}
 
 	// Use this for initialization
 	void Start () {
 		rb3d = GetComponent<Rigidbody> ();
-
-		GameObject go = GameObject.FindGameObjectsWithTag ("Player");
-
-		target = go.transform;
-
-		maxdistance = 2.0f;
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		actionChange -= Time.deltaTime;
-
-		if (actionChange == 0) {
-			Invoke ("actChng", 3.0f);
-			actionChange += 3.0f;
-		}
-
-		if (action == 0) {
-			int direction = Random.Range (0, 2);
-			Vector3 temp = transform.position;
-
-			if (direction == 0)
+		Collider[] detection = Physics.OverlapSphere (transform.position, 5.0f);
+		for (int i = 0; i < detection.Length; i++) {
+			if (detection[i].gameObject.tag == "Player")
 			{
-				temp.x += speed * Time.deltaTime;
-				rb3d.transform.position = temp;
-			}
-
-			if (direction == 1)
-			{
-				temp.x -= speed * Time.deltaTime;
-				rb3d.transform.position = temp;
+				Debug.Log("player detect");
+				
+				//rotate to look at the player
+				transform.LookAt(detection[i].gameObject.transform.position);
+				transform.Rotate(new Vector3(0,-90,0),Space.Self);//correcting the original rotation
+				
+				
+				//move towards the player
+				if (Vector3.Distance(transform.position,detection[i].gameObject.transform.position)>1f){//move if distance from target is greater than 1
+					transform.Translate(new Vector3(speed* Time.deltaTime,0,0) );
+				}
 			}
 		}
-
-		Debug.DrawLine (target.position, myTransform.position, Color.red);
 	}
 }

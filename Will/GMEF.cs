@@ -12,7 +12,7 @@ public class GMEF : MonoBehaviour {
 	private float STimer = 600.0f; //Timer for Spore Biome
 	private float CTimer = 600.0f; //Timer for Crystal Biome
 	private float mobTimer = 5.0f;
-	private int mobCount = 0;
+	public static int mobCount = 0;
 	public static GMEF instance = null;
 
 	void Awake(){
