@@ -32,8 +32,21 @@ public class GMEF : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		mobTimer -= Time.deltaTime;
+		mobTimer -= Time.deltaTime;// Resets spawn time every 5 seconds
 		MobSpawner ();
+
+		//Timers countdown for the different biomes
+		if (Application.loadedLevel == 2) {
+			EFTimer -= Time.deltaTime;
+		}
+
+		if (Application.loadedLevel == 3) {
+			STimer -= Time.deltaTime;
+		}
+
+		if (Application.loadedLevel == 4) {
+			CTimer -= Time.deltaTime;
+		}
 	}
 
 	void MobSpawner(){

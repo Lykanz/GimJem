@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerBehaviour : MonoBehaviour {
@@ -7,12 +8,26 @@ public class PlayerBehaviour : MonoBehaviour {
 	[SerializeField] private float jumpForce = 400.0f;
 	private bool grounded;
 	private Rigidbody rb3d;
-	//public static int nextLevel; //Decides the next level to load
+	private float hp = 1.0f;
+	private bool invincible;
 	public GameObject laserProj;
+	public Image health;
 
 	void OnCollisionEnter(Collision col)
 	{
 		grounded = true;
+
+		if (col.gameObject.tag == "mobs" && !invincible) {
+			Debug.Log(hp);
+			hp -= 0.1f;
+			invincible = true;
+			Invoke("offInvin", 3.0f);
+		}
+	}
+
+	void offInvin()
+	{
+		invincible = false;
 	}
 
 	void OnCollisionStay(Collision col)
@@ -55,7 +70,13 @@ public class PlayerBehaviour : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonDown (0)) {
-			Instantiate (laserProj, rb3d.transform.position, Quaternion.identity);
+			Vector3 position = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 10.0f);
+			position = Camera.main.ScreenToWorldPoint (position);
+			GameObject go = Instantiate(laserProj, transform.position, Quaternion.identity) as GameObject;
+			go.transform.LookAt(position);
+			go.GetComponent<Rigidbody>().AddForce(go.transform.forward * 1000);
 		}
+
+		health.fillAmount = hp;
 	}
 }
