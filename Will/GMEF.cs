@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GMEF : MonoBehaviour {
@@ -7,9 +7,12 @@ public class GMEF : MonoBehaviour {
 	public GameObject Mob2;
 	public GameObject Mob3;
 	public GameObject Mob4;
+	public GameObject Player;
+	private float EFTimer = 600.0f; //Timer for Enchanted Forest Biome
+	private float STimer = 600.0f; //Timer for Spore Biome
+	private float CTimer = 600.0f; //Timer for Crystal Biome
 	private float mobTimer = 5.0f;
 	private int mobCount = 0;
-	private int resourceCount = 0;
 	public static GMEF instance = null;
 
 	void Awake(){
@@ -18,6 +21,8 @@ public class GMEF : MonoBehaviour {
 		else if (instance != this)
 			Destroy (gameObject);
 		Time.timeScale = 1f;
+
+		DontDestroyOnLoad (transform.gameObject);
 	}
 
 	// Use this for initialization
@@ -68,9 +73,7 @@ public class GMEF : MonoBehaviour {
 		}
 	}
 
-	void ResourceSpawner(){
-		if (resourceCount < 10) {
-		
-		}
+	public void LoadLevels(){
+	
 	}
 }
