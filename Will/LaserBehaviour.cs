@@ -12,7 +12,6 @@ public class LaserBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 dir = (Input.mousePosition - rb3d.transform.position).normalized;
-		rb3d.AddForce (dir * 5.0f);
+
 	}
 }
